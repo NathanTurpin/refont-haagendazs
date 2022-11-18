@@ -6,39 +6,13 @@
     <main>
       <div class="news">
         <h3>Nos nouveautés</h3>
-        <!-- <div class="row justify-content-between">
-          <div v-for="(card, id) in cards" :key="id" class="col-sm-2">
-            <div
-              class="card-news"
-              @mouseover="displayFullCard(id)"
-              @mouseleave="hideCard(id)"
-            >
-              <div class="images">
-                <img
-                  :src="require('@/assets/' + card.background)"
-                  alt=""
-                  class="images__back"
-                />
-                <img
-                  :src="require('@/assets/' + card.image)"
-                  class="images__front"
-                />
-              </div>
-
-              <div class="card-news__body">
-                <h6 class="card-news__text">
-                  {{ card.title }}
-                </h6>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <div class="row-news">
           <div v-for="(card, id) in cards" :key="id">
             <div
               class="card-news"
               @mouseover="displayFullCard(id)"
               @mouseleave="hideCard(id)"
+              data-aos="zoom-in"
             >
               <div class="card-news__images">
                 <img
@@ -62,26 +36,37 @@
       </div>
       <div class="crossover">
         <div class="crossover__left">
-          <div class="crossover__left--text">
+          <div class="crossover__left--paragraphe">
             <h3>Haagen-Dazs x Biscoff</h3>
-            <p>
+            <p class="crossover__left--text">
               Lorsque l'onctuosité de la crème glacée au caramel rencontre le
               croquant du Lotus Biscoff, cela crée un mélange irrésistible !
             </p>
-            <button>Découvrir Notre collab’ X Biscoff</button>
+            <button class="crossover__left--btn">
+              Découvrir Notre collab’ X Biscoff
+            </button>
           </div>
           <div class="crossover__left--img">
             <img src="@/assets/bisscoff1.png" alt="" />
-            <img src="@/assets/bisscoff2.png" alt="" />
+            <img src="@/assets/bisscoff2.png" alt="" id="bisscoff2" />
           </div>
         </div>
         <div class="crossover__right">
           <img
-            src="@/assets/back-bisscoff-crossover.png"
+            src="@/assets/crossover-glace.png"
             alt=""
-            class="crossover__right--bisscoff"
+            class="crossover__right--glace"
           />
         </div>
+        <img
+          src="@/assets/back-bisscoff-crossover.png"
+          alt=""
+          class="crossover__bisscoff"
+          data-aos="fade-down-left"
+          data-aos-duration="1000"
+          data-aos-delay="250"
+          data-aos-anchor-placement="center-bottom"
+        />
       </div>
     </main>
   </div>
@@ -91,6 +76,12 @@
 import TopNav from "@/components/TopNav.vue";
 import MainHeader from "@/components/MainHeader.vue";
 import BotHeader from "@/components/BotHeader.vue";
+import { onMounted } from "vue";
+import AOS from "aos";
+
+onMounted(() => {
+  AOS.init();
+});
 
 const cards = [
   {
@@ -136,9 +127,12 @@ const hideCard = (id) => {
 </script>
 
 <style lang="scss" scoped>
+main {
+  overflow: hidden;
+}
 .news {
   width: 80%;
-  margin: 10% auto 0 auto;
+  margin: 10% auto 6% auto;
 }
 .row-news {
   display: flex;
@@ -167,20 +161,57 @@ const hideCard = (id) => {
 
 .crossover {
   display: flex;
-  width: 80%;
-  margin: auto;
-  &__left {
-    width: 50%;
-    align-content: center;
+  width: 95%;
+  float: right;
+  position: relative;
+  &__bisscoff {
+    position: absolute;
+    top: -15rem;
+    margin-left: 13rem;
   }
-  &__right {
-    width: 50%;
-    background-image: url("@/assets/back-crossover.png");
-    background-repeat: no-repeat;
-    background-clip: content-box;
-    &--bisscoff {
-      overflow: hidden;
+  &__left {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &--paragraphe {
+      margin-left: 10%;
+    }
+    &--text {
+      width: 70%;
+    }
+    &--btn {
+      border: 2px solid #c79952;
+      background-color: white;
+      color: #c79952;
+      padding: 14px 108px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    &--img {
+      display: flex;
+      flex-direction: column;
+      width: 20%;
+      margin-top: 10%;
     }
   }
+  &__right {
+    width: 60%;
+    background-image: url("@/assets/back-crossover.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 35rem;
+    &--glace {
+      position: absolute;
+      top: -7rem;
+      left: 1rem;
+      width: 40%;
+      z-index: 20;
+    }
+  }
+}
+#bisscoff2 {
+  margin-left: 20px;
 }
 </style>
