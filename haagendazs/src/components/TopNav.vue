@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  padding-top: 10px;
   &__item {
     color: white;
     font-weight: 400;
