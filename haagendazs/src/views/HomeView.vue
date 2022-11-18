@@ -115,14 +115,20 @@ const displayFullCard = (id) => {
   const cardsText = document.getElementsByClassName("card-news__body");
   const backImages = document.getElementsByClassName("card-news__images--back");
   cardsText[id].style.visibility = "initial";
+  cardsText[id].style.transform = "scale(1.1,1.1)";
+
   backImages[id].style.visibility = "initial";
+  backImages[id].style.transform = "scale(1.1,1.1)";
 };
 
 const hideCard = (id) => {
   const cardsText = document.getElementsByClassName("card-news__body");
   const backImages = document.getElementsByClassName("card-news__images--back");
   cardsText[id].style.visibility = "hidden";
+  cardsText[id].style.transform = "scale(0,0)";
+
   backImages[id].style.visibility = "hidden";
+  backImages[id].style.transform = "scale(0,0)";
 };
 </script>
 
@@ -137,6 +143,7 @@ main {
 .row-news {
   display: flex;
   justify-content: space-between;
+  margin-top: 2%;
 }
 
 .card-news__images {
@@ -148,10 +155,13 @@ main {
   }
   &--back {
     visibility: hidden;
+    transition: transform 1.3s;
   }
 }
 .card-news__body {
   visibility: hidden;
+  transition: transform 1s;
+
   &--text {
     margin: 5rem auto 1rem auto;
     text-align: center;
